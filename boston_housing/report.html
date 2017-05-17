@@ -11779,7 +11779,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
@@ -11969,7 +11969,7 @@ Standard deviation of prices: $165,171.13
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;r2_score&#39;</span>
@@ -12091,7 +12091,7 @@ Standard deviation of prices: $165,171.13
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;train_test_split&#39;</span>
@@ -14616,7 +14616,7 @@ RU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>回答: </strong> 网格搜索法是使用不同的参数组合来训练模型，通过开发人员指定的相关参数组合，例如在决策树里，不同的参数组合主要是决策树的最大深度。最后得出一个最优的参数组合和模型，可以自动化搜索最优参数和最优模型</p>
+<p><strong>回答: </strong> 网格搜索法是使用不同的参数组合来训练模型，通过开发人员指定的相关参数组合，例如在决策树里，不同的参数组合主要是决策树的最大深度。最后通过遍历不同的参数组合，得出一个最优的参数组合和模型，可以自动化搜索最优参数和最优模型</p>
 
 </div>
 </div>
@@ -14674,7 +14674,7 @@ RU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Import &#39;make_scorer&#39;, &#39;DecisionTreeRegressor&#39;, and &#39;GridSearchCV&#39;</span>
@@ -14736,7 +14736,7 @@ RU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Fit the training data to the model using grid search</span>
@@ -14819,7 +14819,7 @@ RU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Produce a matrix for client data</span>
@@ -14863,7 +14863,7 @@ Predicted selling price for Client 3&#39;s home: $931,636.36
 <li>Client 1's home: \$403,025.00</li>
 <li>Client 2's home: \$237,478.72  </li>
 <li>Client 3's home: \$931,636.36<br>
-从上面的预测结果来看，这样的价格还算合理，房间多的价格教贵，学生老师比小的，社区贫困指数也较低，说明和预期分析的差不多。</li>
+从上面的预测结果来看，这样的价格还算合理，房间多的价格教贵，学生老师比小的，社区贫困指数也较低，说明和预期分析的差不多。而且整体符合之前的统计量，都在最大值和最小值之间，</li>
 </ul>
 
 </div>
@@ -14881,7 +14881,7 @@ Predicted selling price for Client 3&#39;s home: $931,636.36
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">vs</span><span class="o">.</span><span class="n">PredictTrials</span><span class="p">(</span><span class="n">features</span><span class="p">,</span> <span class="n">prices</span><span class="p">,</span> <span class="n">fit_model</span><span class="p">,</span> <span class="n">client_data</span><span class="p">)</span>
@@ -14901,7 +14901,7 @@ Predicted selling price for Client 3&#39;s home: $931,636.36
 Trial 2: $419,700.00
 Trial 3: $415,800.00
 Trial 4: $420,622.22
-Trial 5: $413,334.78
+Trial 5: $418,377.27
 Trial 6: $411,931.58
 Trial 7: $399,663.16
 Trial 8: $407,232.00
@@ -14943,8 +14943,9 @@ Range in prices: $69,044.61
 <ul>
 <li>1978年所采集的数据，现在应该不使用了，因为随着时代的发展有些特征已经不再是影响房价的主要因素，而可能又出现新的特征影响房价。</li>
 <li>数据中呈现的特征我认为不足以描述一个房屋，因为除了这些因素以外，可能还存在着别的，比如面积，房屋的面积和房间的数量不是严格成正比的，长宽比，方形的房屋要比细长的好等。</li>
-<li>模型还不足够健壮，因为考虑的特征值较少，还可能有别的特征在影响房价。</li>
-<li>像波士顿这种大都市采集的数据，不能应用到乡镇地区，因为大都市和乡镇有着不一样的特征。</li>
+<li>我认为模型已经相当健壮，多次预测同一个房屋，价格相近。</li>
+<li>像波士顿这种大都市采集的数据，不能应用到乡镇地区，因为大都市和乡镇有着不一样的特征。<br>
+最后，我认为该模型还不足以在现实世界中使用，还有一些缺陷。</li>
 </ul>
 
 </div>
