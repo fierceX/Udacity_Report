@@ -56,7 +56,7 @@ class LearningAgent(Agent):
         ## TO DO ##
         ###########
         # Set 'state' as a tuple of relevant data for the agent        
-        state = {waypoint,inputs['light'],inputs['oncoming'],deadline}
+        state = {'waypoint':waypoint,'light':inputs['light'],'oncoming':inputs['oncoming'],'deadline':deadline}
 
         return state
 
@@ -84,10 +84,9 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        for n,k in enumerate(state):
+        for k,_ in self.build_state().iteritems():
             if not k in self.Q:
-                z = {'None':0.0,"forward":0.0,"left":0.0,"right":0.0}
-                self.Q[n] = z
+                self.Q[k] = {'None':0.0,"forward":0.0,"left":0.0,"right":0.0}
 
         return
 
