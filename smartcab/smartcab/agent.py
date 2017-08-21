@@ -69,8 +69,10 @@ class LearningAgent(Agent):
         ## TO DO ##
         ###########
         # Calculate the maximum Q-value of all actions for a given state
-
-        maxQ = None
+        maxQ = dict()
+        for k,v in state.iteritems():
+            x = self.Q[k][v]
+            maxQ[k] = max(x.items())[1]
 
         return maxQ 
 
@@ -84,9 +86,13 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        for k,_ in self.build_state().iteritems():
+        for k,s in self.build_state().iteritems():
             if not k in self.Q:
-                self.Q[k] = {'None':0.0,"forward":0.0,"left":0.0,"right":0.0}
+                self.Q[k] = dict()
+                self.Q[k][s] = {None:0.0,"forward":0.0,"left":0.0,"right":0.0}
+            else:
+                if not s in self.Q[k]:
+                    self.Q[k][s] = {None:0.0,"forward":0.0,"left":0.0,"right":0.0}
 
         return
 
@@ -121,6 +127,23 @@ class LearningAgent(Agent):
         ###########
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
+
+        
+        nextstate = self.build_state()
+        self.createQ(nextstate)
+        Mq = self.get_maxQ(nextstate)
+        qz = dict()
+        for k,v in state.iteritems():
+            z = self.Q[k][v][action]
+            self.Q[k][v][action] = (1-self.alpha) * z + reward + Mq[k]
+        
+
+
+      #  (1-self.alpha) * 
+
+
+
+        
 
         return
 
@@ -157,13 +180,13 @@ def run():
     #   learning   - set to True to force the driving agent to use Q-learning
     #    * epsilon - continuous value for the exploration factor, default is 1
     #    * alpha   - continuous value for the learning rate, default is 0.5
-    agent = env.create_agent(LearningAgent)
+    agent = env.create_agent(LearningAgent,learning =True)
     
     ##############
     # Follow the driving agent
     # Flags:
     #   enforce_deadline - set to True to enforce a deadline metric
-    env.set_primary_agent(agent,enforce_deadline=True)
+    env.set_primary_agent(agent,enforce_deadline=False)
 
     ##############
     # Create the simulation
