@@ -32,13 +32,17 @@ class LearningAgent(Agent):
 
         # Select the destination as the new location to route to
         self.planner.route_to(destination)
-        
+        self.epsilon = self.epsilon - 0.01
         ########### 
         ## TO DO ##
         ###########
         # Update epsilon using a decay function of your choice
         # Update additional class parameters as needed
         # If 'testing' is True, set epsilon and alpha to 0
+
+        if testing:
+            self.epsilon = 0
+            self.alpha = 0
 
         return None
 
@@ -56,7 +60,7 @@ class LearningAgent(Agent):
         ## TO DO ##
         ###########
         # Set 'state' as a tuple of relevant data for the agent        
-        state = {'waypoint':waypoint,'light':inputs['light'],'oncoming':inputs['oncoming'],'deadline':deadline}
+        state = {'waypoint':waypoint,'light':inputs['light'],'oncoming':inputs['oncoming']}
 
         return state
 
@@ -86,7 +90,7 @@ class LearningAgent(Agent):
         # When learning, check if the 'state' is not in the Q-table
         # If it is not, create a new dictionary for that state
         #   Then, for each action available, set the initial Q-value to 0.0
-        for k,s in self.build_state().iteritems():
+        for k,s in state.iteritems():
             if not k in self.Q:
                 self.Q[k] = dict()
                 self.Q[k][s] = {None:0.0,"forward":0.0,"left":0.0,"right":0.0}
@@ -104,8 +108,18 @@ class LearningAgent(Agent):
         # Set the agent state and default action
         self.state = state
         self.next_waypoint = self.planner.next_waypoint()
-        x = random.randint(0,3)
-        action =  self.valid_actions[x]
+
+        x = random.random()
+        z = random.randint(0,3)
+        if self.epsilon > x :
+            action =  self.valid_actions[z]
+        else:
+            dd = {None:0.0,"forward":0.0,"left":0.0,"right":0.0}
+            for k,v in self.state.iteritems():
+                for kk,vv in self.Q[k][v].iteritems():
+                        dd[kk] = dd[kk]+vv
+            action = max(dd.items())[0]
+
 
         ########### 
         ## TO DO ##
@@ -135,7 +149,7 @@ class LearningAgent(Agent):
         qz = dict()
         for k,v in state.iteritems():
             z = self.Q[k][v][action]
-            self.Q[k][v][action] = (1-self.alpha) * z + reward + Mq[k]
+            self.Q[k][v][action] = (1-self.alpha) * z + self.alpha * (reward + Mq[k])
         
 
 
@@ -180,13 +194,13 @@ def run():
     #   learning   - set to True to force the driving agent to use Q-learning
     #    * epsilon - continuous value for the exploration factor, default is 1
     #    * alpha   - continuous value for the learning rate, default is 0.5
-    agent = env.create_agent(LearningAgent,learning =True)
+    agent = env.create_agent(LearningAgent,learning =True,alpha=0.3)
     
     ##############
     # Follow the driving agent
     # Flags:
     #   enforce_deadline - set to True to enforce a deadline metric
-    env.set_primary_agent(agent,enforce_deadline=False)
+    env.set_primary_agent(agent,enforce_deadline=True)
 
     ##############
     # Create the simulation
@@ -195,14 +209,14 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env,update_delay=0.01,display=True,log_metrics=True,optimized=False)
+    sim = Simulator(env,update_delay=0.001,display=False,log_metrics=True,optimized=True)
     
     ##############
     # Run the simulator
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(tolerance=0.05,n_test=10)
+    sim.run(tolerance=0.0001,n_test=10)
 
 
 if __name__ == '__main__':
