@@ -25,7 +25,6 @@ class LearningAgent(Agent):
         ###########
         # Set any additional class parameters as needed
         self.num = 0
-        self.x = True
 
     def reset(self, destination=None, testing=False):
         """ The reset function is called at the beginning of each trial.
@@ -40,7 +39,6 @@ class LearningAgent(Agent):
         # Update epsilon using a decay function of your choice
         # Update additional class parameters as needed
         # If 'testing' is True, set epsilon and alpha to 0
-        self.x = testing
 
         if testing:
             self.epsilon = -1
@@ -48,7 +46,7 @@ class LearningAgent(Agent):
             return None
         self.num+=1
         self.epsilon = 0.95**self.num
-        #self.epsilon = self.epsilon - 0.1
+        #self.epsilon = self.epsilon - 0.05
 
         return None
 
