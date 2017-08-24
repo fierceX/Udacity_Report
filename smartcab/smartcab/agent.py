@@ -78,7 +78,7 @@ class LearningAgent(Agent):
         ###########
         # Calculate the maximum Q-value of all actions for a given state
 
-        maxQ = max(self.Q[state.__str__()].items(),key=lambda x:x[1])
+        maxQ = max(self.Q[state.__str__()].items(),key=lambda x:x[1])[1]
 
         return maxQ 
 
@@ -106,14 +106,13 @@ class LearningAgent(Agent):
         # Set the agent state and default action
         self.state = state
         self.next_waypoint = self.planner.next_waypoint()
-
         x = random.random()
-        z = random.randint(0,3)
         action = None
         if self.epsilon <= x :
-            action,_ = self.get_maxQ(state)
+            mqlist = sorted(self.Q[state.__str__()].items(),key=lambda e:e[1],reverse=True)
+            action = random.sample([z[0] for z in mqlist if z[1] == mqlist[0][1]],1)[0]
         else:
-            action =  self.valid_actions[z]
+            action = random.sample(self.valid_actions,1)[0]
 
         ########### 
         ## TO DO ##
@@ -138,7 +137,7 @@ class LearningAgent(Agent):
 
         nextstate = self.build_state()
         self.createQ(nextstate)
-        _,Mq = self.get_maxQ(nextstate)
+        Mq = self.get_maxQ(nextstate)
 
         self.Q[state.__str__()][action] = (1-self.alpha)*self.Q[state.__str__()][action] + self.alpha*(reward+ 0 * Mq)
 
@@ -199,7 +198,7 @@ def run():
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(tolerance=0.001,n_test=10)
+    sim.run(tolerance=0.0001,n_test=10)
 
 
 if __name__ == '__main__':
