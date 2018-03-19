@@ -4,6 +4,7 @@
 - Mxnet 1.1.0 (GPU版)
 - numpy 1.13.1
 - matplotlib 2.1.2
+- multicoretsne
 ### Mxnet安装
 具体安装教程参见Mxnet官网和  [Mxnet安装教程](http://zh.gluon.ai/chapter_preface/install.html)  
 使用pip安装  
@@ -19,6 +20,8 @@ pip install mxnet-cu80
 pip install mxnet-cu90
 ```
 安装CUDA9版本  
+### multicoretsne 安装  
+参见multicoretsne项目[github](https://github.com/DmitryUlyanov/Multicore-TSNE)页面  
 ## 项目文件说明
 - CNN_Text_Classification.ipynb  
     TextCNN模型训练脚本
@@ -26,6 +29,8 @@ pip install mxnet-cu90
     数据预处理脚本
 - test.ipynb  
     测试集测试脚本
+- Data_Visualization
+    数据可视化脚本
 - data_vocab  
     数据词典文件
 - label_vocab  
